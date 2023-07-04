@@ -1,7 +1,6 @@
 (ns sandbox.algos.hashmap.two-sum
   (:require [clojure.test :refer [deftest is]]))
 
-
 (defn two-sum
   [nums target]
   (loop [num-map {}
@@ -12,7 +11,6 @@
       (if match
         [match idx]
         (recur (assoc num-map x idx) xs (inc idx))))))
-
 
 (deftest two-sum-test
   (is (= (two-sum [2 7 11 15] 9) [0 1]))
