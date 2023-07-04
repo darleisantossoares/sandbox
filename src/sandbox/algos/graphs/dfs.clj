@@ -1,11 +1,5 @@
-(ns sandbox.algos.graphs.dfs)
-
-(def graph {:a [:b :c]
-            :b [:a :d :e]
-            :c [:a :f]
-            :d [:b]
-            :e [:b :f]
-            :f [:c :e]})
+(ns sandbox.algos.graphs.dfs
+  (:require [clojure.test :refer [deftest is are run-tests]]))
 
 (defn dfs
   [graph start]
@@ -19,9 +13,20 @@
             new-path (conj path node)]
         (if (visited node)
           (recur (pop stack) visited new-path)
-          (do
-            (println node "->" path "->" neighbours)
-            (recur (into stack (remove visited neighbours)) (conj visited node) new-path)))))))
+          (recur (into stack (remove visited neighbours)) (conj visited node) new-path))))))
 
+(def graph {:a [:b :c]
+            :b [:a :d :e]
+            :c [:a :f]
+            :d [:b]
+            :e [:b :f]
+            :f [:c :e]
+            :g []})
 
-(println (dfs graph :a))
+(deftest traverse-test
+  (are [g start] (= (dfs g start) #{:a :b :c :d :e :f})
+    graph :a
+    graph :b
+    graph :c)
+  (is (dfs graph :g) #{:g}))
+
