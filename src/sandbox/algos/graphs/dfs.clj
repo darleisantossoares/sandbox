@@ -1,5 +1,5 @@
 (ns sandbox.algos.graphs.dfs
-  (:require [clojure.test :refer [deftest is are run-tests]]))
+  (:require [clojure.test :refer [deftest is are]]))
 
 (defn dfs
   [graph start]
